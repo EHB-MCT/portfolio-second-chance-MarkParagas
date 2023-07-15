@@ -1,5 +1,6 @@
 <script>
 import Navigation from '../components/Nav.vue'
+import router from '../router'
 
 export default {
     components: {
@@ -40,6 +41,7 @@ export default {
                 } else {
                     console.error('POST request failed');
                 }
+                router.push('/Stats') 
             } catch (error) {
                 console.error(error);
             }
@@ -69,11 +71,11 @@ export default {
 
             <!-- Sets -->
             <label for="sets"><b>Sets:</b></label>
-            <input v-model="sets" type="number" name="sets" required>
+            <input v-model="sets" type="number" name="sets" min="0" required>
 
             <!-- Reps -->
             <label for="reps"><b>Reps:</b></label>
-            <input v-model="reps" type="number" name="reps" required>
+            <input v-model="reps" type="number" name="reps" min="0" required>
 
             <!-- Duration -->
             <label for="duration"><b>Duration:</b></label>

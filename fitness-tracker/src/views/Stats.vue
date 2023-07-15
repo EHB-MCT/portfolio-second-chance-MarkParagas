@@ -1,9 +1,11 @@
 <script>
 import Navigation from '../components/Nav.vue'
+import Status from '../components/Charts.vue'
 
 export default {
   components: {
     Navigation,
+    Status,
   },
   data() {
     return {
@@ -32,6 +34,7 @@ export default {
 <template>
     <div class="main">
         <Navigation />
+        <Status />
         <h1>Workout Status</h1>
         <div class="container">
             <section class="statslist">
