@@ -4,8 +4,48 @@ import Navigation from '../components/Nav.vue'
 export default {
     components: {
         Navigation,
-    }
-};
+    },
+    data() {
+        return {
+            date: '',
+            workout: '',
+            exercise: '',
+            sets: 0,
+            reps: 0,
+            duration: 0
+        }
+    },
+    methods: {
+        async fetchData() {
+            const data = {
+                date: this.date,
+                workout: this.workout,
+                exercise: this.exercise,
+                sets: this.sets,
+                reps: this.reps,
+                duration: this.duration
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/api', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    console.log('POST request successful');
+                } else {
+                    console.error('POST request failed');
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        },
+    },
+}
 </script>
 
 <template>
@@ -59,6 +99,7 @@ export default {
 h1 {
     font-size: 3em;
     text-transform: uppercase;
+    text-align: center;
 }
 
 h2 {
