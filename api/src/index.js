@@ -1,59 +1,67 @@
-const express = require('express')
-const mongoose = require("mongoose");
-const port = process.env.PORT || 5555;
-const cors = require("cors");
+const express = require('express');
+const port = process.env.port || 3000;
 const app = express();
+const mongoose = require('mongoose');
+
+app.use(express.json()); // Parse JSON request bodies
 
 
-const mongodb = `mongodb+srv://markparagas:test@cluster0.2nxem.mongodb.net/?retryWrites=true&w=majority`;
-
-mongoose.connect(mongodb, {
+// Connect to MongoDB
+mongoose.connect('mongodb+srv://markparagas:test@cluster0.2nxem.mongodb.net/workoutdata', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-mongoose.connection.on("connected", () => {
-  console.log("Mongoose is connected");
+// Define a schema for your data
+const dataSchema = new mongoose.Schema({
+  date: String,
+  workout: String,
+  exercise: String,
+  sets: Number,
+  reps: Number,
+  duration: Number,
+}, { collection: 'sessions' });
+
+const Data = mongoose.model('Data', dataSchema)
+
+// GET route
+app.get('/api', async (req, res) => {
+  try {
+    // Retrieve data from the database
+    const data = await Data.find();
+
+    // Send the retrieved data as the response
+    res.json(data);
+    // res.send('GET request received');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error retrieving data');
+  }
 });
 
+// POST route
+app.post('/api', async (req, res) => {
+  const requestData = req.body;
 
-app.use(cors());
+  // Create a new instance of the Data model
+  const newData = new Data(requestData);
 
-// GET
-app.get('/', (request, response) => {
-    let testResponse = {
-        workout: 'Arms',
-        exercise: 'Push-ups',
-        sets: 5,
-        reps: 20,
-        duration: 30,
-    }
-    response.send(testResponse)
-})
+  try {
+    // Save the data to the database
+    await newData.save();
+    res.send('Data saved successfully');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error saving data');
+  }
+});
 
-// POST
-app.post('/', (request, response) => {
-
-    User.find(query)
-    .exec()
-    .then((docs) => {
-      res.status(200).json(docs);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
-    });
-
-    console.log(request.body);
-    response.send('POST Submit')
-})
-
-
+// PORT
+// API = http://localhost:3000/api
 app.listen(port, (err) => {
-    if(!err) {
-        console.log(`Running on port: ${port}`);
-    } else {
-        console.error(err)
-    }
-})
+  if (!err) {
+    console.log(`Running on port: ${port}`);
+  } else {
+    console.error(err);
+  }
+});
