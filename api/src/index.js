@@ -1,13 +1,15 @@
 const express = require('express');
-const port = process.env.port || 3000;
 const app = express();
 const mongoose = require('mongoose');
+require('dotenv').config({ path: './.env' }); // Load environment variables from .env file in the api directory
+
+const port = process.env.PORT || 3000;
+const database = process.env.DATABASE;
 
 app.use(express.json()); // Parse JSON request bodies
 
-
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://markparagas:test@cluster0.2nxem.mongodb.net/workoutdata', {
+mongoose.connect(database, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
