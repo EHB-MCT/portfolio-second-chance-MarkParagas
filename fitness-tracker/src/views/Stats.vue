@@ -2,11 +2,31 @@
 import Navigation from '../components/Nav.vue'
 
 export default {
-    components: {
-        Navigation,
-    }
-}
-
+  components: {
+    Navigation,
+  },
+  data() {
+    return {
+      items: [],
+    };
+  },
+  mounted() {
+    this.fetchData();
+  },
+  methods: {
+    async fetchData() {
+      try {
+        const response = await fetch('http://localhost:3000/api');
+        const getData = await response.json();
+        if (response.ok) {
+          this.items = getData;
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+};
 </script>
 
 <template>
@@ -27,24 +47,6 @@ export default {
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Test -->
-                        <tr>
-                            <td> Monday</td>
-                            <td> Arms </td>
-                            <td> Pushups</td>
-                            <td> 5 </td>
-                            <td> 20 </td>
-                            <td> 20 min</td>
-                        </tr>
-                        <tr>
-                            <td> Monday</td>
-                            <td> Arms </td>
-                            <td> Pushups</td>
-                            <td> 5 </td>
-                            <td> 20 </td>
-                            <td> 20 min</td>
-                        </tr>
-                        <!-- END Test -->
                         <tr v-for="item in items" :key="item.id">
                             <td>{{ item.date }}</td>
                             <td>{{ item.workout }}</td>
