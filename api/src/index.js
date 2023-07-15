@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-require('dotenv').config({ path: './.env' }); // Load environment variables from .env file in the api directory
+require('dotenv').config({ path: './.env' });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 const database = process.env.DATABASE;
 
-app.use(express.json()); // Parse JSON request bodies
+app.use(express.json()); 
 
 // Connect to MongoDB
 mongoose.connect(database, {
@@ -14,7 +14,7 @@ mongoose.connect(database, {
   useUnifiedTopology: true,
 });
 
-// Define a schema for your data
+// Data schema
 const dataSchema = new mongoose.Schema({
   date: String,
   workout: String,
@@ -31,10 +31,8 @@ app.get('/api', async (req, res) => {
   try {
     // Retrieve data from the database
     const data = await Data.find();
-
     // Send the retrieved data as the response
     res.json(data);
-    // res.send('GET request received');
   } catch (err) {
     console.error(err);
     res.status(500).send('Error retrieving data');
@@ -44,8 +42,6 @@ app.get('/api', async (req, res) => {
 // POST route
 app.post('/api', async (req, res) => {
   const requestData = req.body;
-
-  // Create a new instance of the Data model
   const newData = new Data(requestData);
 
   try {
@@ -58,8 +54,7 @@ app.post('/api', async (req, res) => {
   }
 });
 
-// PORT
-// API = http://localhost:3000/api
+// PORT & Should be API = http://localhost:3000/api
 app.listen(port, (err) => {
   if (!err) {
     console.log(`Running on port: ${port}`);
