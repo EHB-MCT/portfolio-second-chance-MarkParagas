@@ -6,53 +6,26 @@ require('dotenv').config({ path: './.env' });
 const port = process.env.PORT;
 const database = process.env.DATABASE;
 
-app.use(express.json()); 
+app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(database, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose
+  .connect(database, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
+  });
 
-// Data schema
-const dataSchema = new mongoose.Schema({
-  date: String,
-  workout: String,
-  exercise: String,
-  sets: Number,
-  reps: Number,
-  duration: Number,
-}, { collection: 'sessions' });
+// Import routes
+const crudRoute = require('../route/crud');
 
-const Data = mongoose.model('Data', dataSchema)
-
-// GET route
-app.get('/api', async (req, res) => {
-  try {
-    // Retrieve data from the database
-    const data = await Data.find();
-    // Send the retrieved data as the response
-    res.json(data);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error retrieving data');
-  }
-});
-
-// POST route
-app.post('/api', async (req, res) => {
-  const requestData = req.body;
-  const newData = new Data(requestData);
-
-  try {
-    // Save the data to the database
-    await newData.save();
-    res.send('Data saved successfully');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error saving data');
-  }
-});
+// Use routes
+app.use('/api', crudRoute);
 
 // PORT & Should be API = http://localhost:3000/api
 app.listen(port, (err) => {
