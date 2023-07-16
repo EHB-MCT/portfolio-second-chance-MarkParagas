@@ -33,3 +33,9 @@ npm run build
 ```sh
 npm run lint
 ```
+
+
+### Chart
+```sh
+npm i chart.js
+```

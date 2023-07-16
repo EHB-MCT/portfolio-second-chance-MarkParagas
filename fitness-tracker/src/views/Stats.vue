@@ -1,11 +1,11 @@
 <script>
 import Navigation from '../components/Nav.vue'
-import Status from '../components/Charts.vue'
+import Chart from '../components/Charts.vue'
 
 export default {
   components: {
     Navigation,
-    Status,
+    Chart,
   },
   data() {
     return {
@@ -22,6 +22,7 @@ export default {
         const getData = await response.json();
         if (response.ok) {
           this.items = getData;
+          console.log(getData)
         }
       } catch (error) {
         console.error(error);
@@ -34,8 +35,7 @@ export default {
 <template>
     <div class="main">
         <Navigation />
-        <Status />
-        <h1>Workout Status</h1>
+        <Chart />
         <div class="container">
             <section class="statslist">
                 <table>
@@ -101,7 +101,7 @@ td {
 }
 
 tbody tr:last-child {
-    background-color: yellow;
+    background-color: #fdfd85;
 }
 
 h1 {
@@ -122,7 +122,7 @@ h3 {
     align-items: center;
     align-content: center;
     justify-content: space-evenly;
-    height: 75vh;
+    height: 100vh;
 }
 
 .container {
