@@ -1,5 +1,6 @@
 <script>
 import Navigation from '../components/Nav.vue'
+import router from '../router'
 
 export default {
     components: {
@@ -40,6 +41,7 @@ export default {
                 } else {
                     console.error('POST request failed');
                 }
+                router.push('/Stats')
             } catch (error) {
                 console.error(error);
             }
@@ -61,19 +63,29 @@ export default {
 
             <!-- Workout -->
             <label for="workout"><b>Workout:</b></label>
-            <input v-model="workout" type="text" name="workout" required>
-
+            <select v-model="workout" type="text" name="workout" >
+                <option disabled value="">Select your workout</option>
+                <option value="Chest">Chest</option>
+                <option value="Biceps">Biceps</option>
+                <option value="Triceps">Triceps</option>
+                <option value="Shoulders">Shoulders</option>
+                <option value="Abs">Abs</option>
+                <option value="Back">Back</option>
+                <option value="Legs">Legs</option>
+                <option value="Arms">Arms</option>
+            </select>
+            
             <!-- Exercise -->
             <label for="exercise"><b>Exercise:</b></label>
             <input v-model="exercise" type="text" name="exercise" required>
 
             <!-- Sets -->
             <label for="sets"><b>Sets:</b></label>
-            <input v-model="sets" type="number" name="sets" required>
+            <input v-model="sets" type="number" name="sets" min="0" required>
 
             <!-- Reps -->
             <label for="reps"><b>Reps:</b></label>
-            <input v-model="reps" type="number" name="reps" required>
+            <input v-model="reps" type="number" name="reps" min="0" required>
 
             <!-- Duration -->
             <label for="duration"><b>Duration:</b></label>
@@ -90,10 +102,12 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    height: 70vh;
-    width: 30%;
-    margin-top: 2%;
+    height: 80vh;
+    margin-top: 1%;
+}
 
+select {
+    text-align: center;
 }
 
 h1 {
