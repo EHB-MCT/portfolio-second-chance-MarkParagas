@@ -101,7 +101,7 @@ td {
 }
 
 tbody tr:last-child {
-    background-color: #fdfd85;
+    background-color: #59f55087;
 }
 
 h1 {
