@@ -21,13 +21,13 @@ export default {
                     backgroundColor: 'rgb(133, 205, 253,0.5)'
                 }, {
                     type: 'line',
-                    label: 'Reps',
+                    label: 'Sets',
                     data: [20, 10, 50],
                     fill: false,
                     borderColor: 'rgb(54, 162, 235)'
                 }, {
                     type: 'line',
-                    label: 'Sets',
+                    label: 'Reps',
                     data: [5, 5, 0],
                     fill: false,
                     borderColor: 'rgb(39, 233, 28)'

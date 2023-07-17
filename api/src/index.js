@@ -5,8 +5,12 @@ const cors = require('cors');
 
 require('dotenv').config({ path: './.env' });
 
-const port = process.env.PORT;
-const database = process.env.DATABASE;
+const port = process.env.API_PORT;
+const database = process.env.MONGODB_DATABASE;
+/*
+const { MONGODB_USER, MONGODB_PASSWORD, MONGODB_DB } = process.env;
+const database = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@cluster0.2nxem.mongodb.net/${MONGODB_DB}`;
+*/
 
 app.use(express.json());
 
