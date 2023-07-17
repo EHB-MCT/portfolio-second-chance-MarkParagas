@@ -10,10 +10,11 @@ services:
       MONGODB_USER: ${MONGODB_USER}
       MONGODB_PASSWORD: ${MONGODB_PASSWORD}
       MONGODB_DB: ${MONGODB_DB}
+      MONGODB_DATABASE: mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@cluster0.2nxem.mongodb.net/${MONGODB_DB} 
     volumes:
       - ./api/src:/usr/app/api/src
     ports:
-      - "3000:3000"
+      - "3000:${API_PORT}"
   
   fitness-tracker:
     build:

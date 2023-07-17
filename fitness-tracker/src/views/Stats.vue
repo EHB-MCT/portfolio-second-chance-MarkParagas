@@ -18,7 +18,7 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const response = await fetch('http://localhost:3000/api');
+        const response = await fetch('http://localhost:3000');
         const getData = await response.json();
         if (response.ok) {
           this.items = getData;

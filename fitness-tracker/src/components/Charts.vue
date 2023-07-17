@@ -52,7 +52,7 @@ export default {
 
         // Fetch and update data of Charts Update chart data from the API database
         async function fetchData() {
-            const response = await fetch('http://localhost:3000/api');
+            const response = await fetch('http://localhost:3000');
             const getData = await response.json();
             console.log(getData);
 
