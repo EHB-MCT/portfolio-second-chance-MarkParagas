@@ -24,3 +24,8 @@ services:
       - "8080:80"
     depends_on:
       - api
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
