@@ -3,7 +3,6 @@
         <div id="nav">
             <router-link to="/" class="nav_btn">Home</router-link>
             <router-link to="/Stats" class="nav_btn">Stats</router-link>
-            <!-- <router-link to="/" class="nav_btn">Logout</router-link> -->
         </div>
     </div>
 </template>

@@ -52,22 +52,19 @@ export default {
 
         // Fetch and update data of Charts Update chart data from the API database
         async function fetchData() {
-            const response = await fetch('http://localhost:3000');
+            const response = await fetch('http://localhost:3000/workouts');
             const getData = await response.json();
             console.log(getData);
 
             // Extract the data from API
-            const workout = getData.map(index => index.workout);
-            console.log(workout);
+            const workout_name = getData.map(index => index.workout_name);
             const duration = getData.map(index => index.duration);
-            console.log(duration);
-            const sets = getData.map(index => index.sets);
-            console.log(sets);
-            const reps = getData.map(index => index.reps);
-            console.log(reps);
+            // This need to be check below
+            const sets = getData.map(index => index.exercises[0].sets);
+            const reps = getData.map(index => index.exercises[0].reps);
 
             // Update chart by API data
-            myChart.data.labels = workout; // Labels
+            myChart.data.labels = workout_name; // Labels
             myChart.data.datasets[0].data = duration; // Duration
             myChart.data.datasets[1].data = sets; // Sets
             myChart.data.datasets[2].data = reps; // Reps
