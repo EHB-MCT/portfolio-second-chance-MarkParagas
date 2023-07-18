@@ -1,12 +1,18 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-require('dotenv').config({ path: './.env' });
+const cors = require('cors'); 
 
-const port = process.env.PORT;
-const database = process.env.DATABASE;
+require('dotenv').config({ path: '../.env' });
 
+const port = process.env.API_PORT;
+// const database = process.env.MONGODB_DATABASE;
+const { MONGODB_USER, MONGODB_PASSWORD, MONGODB_DB } = process.env;
+const database = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@cluster0.2nxem.mongodb.net/${MONGODB_DB}`;
 app.use(express.json());
+
+// CORS
+app.use(cors());
 
 // Connect to MongoDB
 mongoose
@@ -25,12 +31,13 @@ mongoose
 const crudRoute = require('../route/crud2');
 
 // Use routes
-app.use('/api', crudRoute);
+app.use('/', crudRoute);
 
-// PORT & Should be API = http://localhost:3000/api
+// PORT & Should be API = http://localhost:3000
 app.listen(port, (err) => {
   if (!err) {
     console.log(`Running on port: ${port}`);
+    //console.log(MONGODB_DB)
   } else {
     console.error(err);
   }
