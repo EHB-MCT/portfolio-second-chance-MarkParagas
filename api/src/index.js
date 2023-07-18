@@ -22,7 +22,7 @@ mongoose
   });
 
 // Import routes
-const crudRoute = require('../route/crud');
+const crudRoute = require('../route/crud2');
 
 // Use routes
 app.use('/api', crudRoute);
