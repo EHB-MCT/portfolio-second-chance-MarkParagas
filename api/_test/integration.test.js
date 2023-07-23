@@ -4,8 +4,9 @@ const request = supertest(app);
 
 describe("Testing Integration", () => {
   describe("Workout POST", () => {
-    const addNewWorkout = { // correct
-      date: "2023-07-20",
+
+    const addNewWorkout = {
+      date: "2023-07-23",
       workout_name: "Back",
       duration: 20,
       exercises: [
@@ -32,7 +33,15 @@ describe("Testing Integration", () => {
     });
   });
 
+  beforeAll((done) => {
+    // Start the server and store the database | Work!
+    server = app.listen(app.get("port"), () => {
+      console.log(`Server is running on port ${app.get("port")}`);
+      done();
+    });
+  });
   afterAll((done) => {
-    app.close(done);
+    // Close the server after all test is done
+    server.close(done);
   });
 });
