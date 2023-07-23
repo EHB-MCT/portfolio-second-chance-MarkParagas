@@ -132,5 +132,6 @@ router.delete('/exercises/:id', async (req, res) => {
   }
 });
 
-
 module.exports = router;
+
+// Note Update and Delete cannot be used due id is different in mongodb (_id an objectId)

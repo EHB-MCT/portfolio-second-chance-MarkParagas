@@ -1,24 +1,70 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/DhYPBlwE)
 # Portfolio
 
-## Install
-- Docker desktop
-- npm
-- vue-router
+## Requirement
+- Docker desktop!
 
-## Requirements
+## Getting Started
+- Installation
+1. Git clone my repository on Github
+2. Open VScode, change the file (.env.temp) into .env and fill the variabels
+3. Make sure your to 'Docker Desktop' is open
+4. Open to terminal and Type "Docker compose build"
+- Start project
+5. After type in terminal: "Docker compose up"
+6. Go to browser and type: localhost:8080
 
+## Routes to use
 
+### Backend (API) Route
+
+- GET
+Get All workouts
+```
+localhost:3000/Workouts
+```
+
+Get All exercises
+```
+localhost:3000/Exercises
+```
+
+- POST
+Post exercises (first, need to exist)
+```
+localhost:3000/Exercises
+```
+
+Post workouts (second, get the id from exercise)
+```
+localhost:3000/Workouts
+```
+
+### Frontend (Fitness-tracker) Route
+
+- Homepage
+```
+localhost:8080
+```
 
 ## Used packages
 All packages can be found on the [npm page](https://www.npmjs.com)
 - Node
 - Express
 - Nodemon
+- Cors
+- Dotenv
+- Jest
+- Mongodb
+- Mongoose
+- Vue
+- Vue-router
+- Chart.js
 
 ## Links
 - https://nodejs.org/en
 - https://vuejs.org/
+- https://www.npmjs.com/
 
 ## Open Source License
 
@@ -33,35 +79,3 @@ All packages can be found on the [npm page](https://www.npmjs.com)
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
-# fitness-tracker / Frontend
-
-This template should help get you started developing with Vue 3 in Vite.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
