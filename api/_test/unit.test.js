@@ -30,7 +30,7 @@ const test2 = {
   ],
 };
 
-describe("Testing POSTS", () => {
+describe("Testing POST of Unit Test", () => {
   it("check Workout Submit with Valid Data", () => {
     expect(submit.checkSubmitPOST(test)).toBeTruthy(); // True and successful POST
   });
