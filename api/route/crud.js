@@ -2,12 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { Workout, Exercise } = require('../model/model');
 
-// GET workouts route
+// ----------------------------------------------------------- GET workouts route
 router.get('/workouts', async (req, res) => {
   try {
-    // Retrieve workout data from the database
     const workouts = await Workout.find().populate('exercises');
-    // Send the retrieved data as the response
     res.json(workouts);
   } catch (err) {
     console.error(err);
@@ -26,7 +24,6 @@ router.post('/workouts', async (req, res) => {
   });
 
   try {
-    // Save the workout to the database
     await newWorkout.save();
     res.send('Workout saved successfully');
   } catch (err) {
@@ -35,12 +32,46 @@ router.post('/workouts', async (req, res) => {
   }
 });
 
-// GET exercises route
+// UPDATE workout route
+router.put('/workouts/:id', async (req, res) => {
+  const workoutId = req.params.id;
+  const requestData = req.body;
+  try {
+    const workout = await Workout.findByIdAndUpdate(
+      workoutId,
+      {
+        $set: {
+          date: requestData.date,
+          workout_name: requestData.workout_name,
+          duration: requestData.duration,
+          exercises: requestData.exercises
+        }
+      },
+      { new: true }
+    );
+    res.json(workout);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error updating workout');
+  }
+});
+
+// DELETE workout route
+router.delete('/workouts/:id', async (req, res) => {
+  const workoutId = req.params.id;
+  try {
+    await Workout.findByIdAndRemove(workoutId);
+    res.send('Workout deleted successfully');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error deleting workout');
+  }
+});
+
+// ----------------------------------------------------------- GET exercises route
 router.get('/exercises', async (req, res) => {
   try {
-    // Retrieve exercise data from the database
     const exercises = await Exercise.find();
-    // Send the retrieved data as the response
     res.json(exercises);
   } catch (err) {
     console.error(err);
@@ -58,15 +89,48 @@ router.post('/exercises', async (req, res) => {
   });
 
   try {
-    // Save the exercise to the database
     const savedExercise = await newExercise.save();
-
-    // Include the generated _id in the response
     res.status(201).json({ id: savedExercise._id, message: 'Exercise saved successfully' });
   } catch (err) {
     console.error(err);
     res.status(500).send('Error saving exercise');
   }
 });
+
+// UPDATE exercise route
+router.put('/exercises/:id', async (req, res) => {
+  const exerciseId = req.params.id;
+  const requestData = req.body;
+  try {
+    const exercise = await Exercise.findByIdAndUpdate(
+      exerciseId,
+      {
+        $set: {
+          exercise_name: requestData.exercise_name,
+          sets: requestData.sets,
+          reps: requestData.reps
+        }
+      },
+      { new: true }
+    );
+    res.json(exercise);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error updating exercise');
+  }
+});
+
+// DELETE exercise route
+router.delete('/exercises/:id', async (req, res) => {
+  const exerciseId = req.params.id;
+  try {
+    await Exercise.findByIdAndRemove(exerciseId);
+    res.send('Exercise deleted successfully');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error deleting exercise');
+  }
+});
+
 
 module.exports = router;
