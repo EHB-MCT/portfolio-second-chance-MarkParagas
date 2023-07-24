@@ -12,13 +12,16 @@ services:
       MONGODB_DB: ${MONGODB_DB}
     volumes:
       - ./api/src:/usr/app/api/src
+      - workoutDB:/path/to/your/api/data/directory
     ports:
       - "3000:${API_PORT}"
-      
+
   fitness-tracker:
     build:
       context: ./fitness-tracker
       dockerfile: Dockerfile
+    volumes:
+      - workoutDB:/path/to/your/fitness-tracker/data/directory
     ports:
       - "8080:80"
     depends_on:
@@ -28,3 +31,6 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  workoutDB:
