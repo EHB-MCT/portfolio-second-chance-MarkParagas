@@ -1,0 +1,39 @@
+# This is a basic workflow to help you get started with Actions
+name: deploy
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push request events but only in the the master branch
+  push:
+    branches: [ main ]
+    
+env:
+  API_PORT: 3000
+  MONGODB_USER: Fit-tracker
+  MONGODB_PASSWORD: Workout
+  MONGODB_DB: workoutdata
+
+jobs:
+
+ test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build docker containers
+      run: docker-compose build 
+
+    - name: Run docker containers
+      run: docker-compose up -d
+      
+    - name: Run npm install
+      run: |
+        cd api
+        npm ci
+        
+    - name: Run tests
+      run: |
+        cd api
+        npm run test-ci
