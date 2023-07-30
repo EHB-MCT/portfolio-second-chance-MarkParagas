@@ -35,7 +35,7 @@ jobs:
       - name: run tests
         run: |
           cd api
-          npm run test
+          npm run test -- --detectOpenHandles
  
  build:
     needs: test
