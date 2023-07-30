@@ -32,6 +32,7 @@ app.use('/', crudRoute);
 
 // For integration test
 function startServer() {
+  app.set('port', port); // Add this line to set the port value
   // Return to integration test
   return app.listen(port, (err) => {
     if (!err) {
