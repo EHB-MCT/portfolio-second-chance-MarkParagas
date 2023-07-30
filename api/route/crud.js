@@ -1,5 +1,4 @@
 import { router } from 'express';
-const router = express.Router();
 import { Workout, Exercise } from '../model/model';
 
 // ----------------------------------------------------------- GET workouts route
