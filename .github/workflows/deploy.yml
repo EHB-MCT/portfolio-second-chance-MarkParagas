@@ -36,6 +36,8 @@ jobs:
         run: |
           cd api
           npm run test -- --detectOpenHandles
+      - name: Terminate Workflow
+        run: exit 0
  
  build:
     needs: test
