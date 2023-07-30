@@ -1,5 +1,5 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/DhYPBlwE)
-# Portfolio
+# Fitness-tracking
 
 ## Requirement
 - Docker desktop!
@@ -46,6 +46,9 @@ localhost:3000/Workouts
 ```
 localhost:8080
 ```
+
+Homepage is a user-friendly form where you can enter your workout details. The data you input will be saved to a status page. 
+You'll be able to see your workout progress presented in easy-to-understand charts, helping you track your fitness journey effectively.
 
 ## Used packages
 All packages can be found on the [npm page](https://www.npmjs.com)
