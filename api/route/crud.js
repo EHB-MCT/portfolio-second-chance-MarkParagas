@@ -1,6 +1,6 @@
-const express = require('express');
+import { router } from 'express';
 const router = express.Router();
-const { Workout, Exercise } = require('../model/model');
+import { Workout, Exercise } from '../model/model';
 
 // ----------------------------------------------------------- GET workouts route
 router.get('/workouts', async (req, res) => {
