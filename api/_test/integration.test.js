@@ -1,8 +1,12 @@
-const app = require("./../src/index.js");
+const app = require("../src/index.js");
 const supertest = require("supertest");
 const request = supertest(app);
+const port = 3001 || 3001 ;
+
 
 describe("Testing Integration", () => {
+  let server;
+
   describe("Workout POST", () => {
     const addNewWorkout = {
       date: "2023-07-23",
@@ -32,15 +36,19 @@ describe("Testing Integration", () => {
     });
   });
 
-  // Start the server before running the tests
-  let server;
   beforeAll((done) => {
-    server = app.startServer();
-    done();
+    server = app.startServer(port);
+    server.once("listening", () => {
+      console.log(`Server is running on port ${port}`);
+      done();
+    });
   });
 
-  // Close the server after all test is done
   afterAll((done) => {
-    server.close(done);
+    server.close(() => {
+      console.log("Server closed");
+      done();
+    });
   });
-});
+  
+})

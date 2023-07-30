@@ -3,8 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors'); 
 require('dotenv').config({ path: '../.env' });
-const port = process.env.API_PORT;
-const testPort = 3001;
+//const port = process.env.API_PORT;
+const port = 3001;
 const { MONGODB_USER, MONGODB_PASSWORD, MONGODB_DB } = process.env;
 const database = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@cluster0.2nxem.mongodb.net/${MONGODB_DB}`;
 app.use(express.json());
@@ -33,11 +33,11 @@ app.use('/', crudRoute);
 
 // For integration test
 function startServer() {
-  app.set('port', testPort); // Add this line to set the port value
+  app.set('port', port); // Add this line to set the port value
   // Return to integration test
-  return app.listen(testPort, (err) => {
+  return app.listen(port, (err) => {
     if (!err) {
-      console.log(`Running on port: ${testPort}`);
+      console.log(`Running on port: ${port}`);
       console.log(MONGODB_DB)
     } else {
       console.error(err);
