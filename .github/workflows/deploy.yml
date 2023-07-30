@@ -19,26 +19,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Build docker containers
-      run: docker-compose build 
-
-    - name: Run docker containers
-      run: docker-compose up -d
+      - name: build docker containers
+        run: docker-compose build 
       
-    - name: Run npm install
-      run: |
-        cd api
-        npm ci
-        
-    - name: Run tests
-      run: |
-        cd api
-        npm run test
-        
-  build:
+      - name: run docker containers
+        run: docker-compose up -d
+      
+      - name: run npm install
+        run: |
+          cd api
+          npm ci
+          
+      - name: run tests
+        run: |
+          cd api
+          npm run test
+ 
+ build:
     needs: test
     runs-on: ubuntu-latest
 
