@@ -80,7 +80,7 @@ export default {
       <h2>Fill out the form for today's workout</h2>
 
       <label for="date"><b>Date:</b></label> <!-- Current Day -->
-      <input v-model="date" type="date" name="date" required />
+      <input v-model="date" type="date" name="date" />
       
       <label for="workout"><b>Workout:</b></label> <!-- Workout -->
       <select v-model="workout_name" type="text" name="workout_name">
