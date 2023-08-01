@@ -6,24 +6,6 @@ const port = 3001;
 describe("Testing Integration", () => {
   let server;
 
-  /*
-  // True - Works
-    describe("Workout POST - Success", () => {
-    const WorkoutTest = {
-      date: "2023-07-23",
-      workout_name: "Back",
-      duration: 20,
-      exercises: [
-        {
-          _id: "64bdb1b119bb9c87717235a2",
-          exercise_name: "Deadlift",
-          sets: 5,
-          reps: 12,
-        },
-      ],
-    };
-  */
-
   // False | Duration is zero value
   describe("Duration is Zero", () => {
     const WorkoutTest = {
@@ -232,7 +214,35 @@ describe("Testing Integration", () => {
     });
   });
 
-  // -------------------------------- Dont  change below this code
+  // True - Works
+    describe("Workout POST - Success", () => {
+    const WorkoutTest = {
+      date: "2023-07-23",
+      workout_name: "Back",
+      duration: 20,
+      exercises: [
+        {
+          _id: "64bdb1b119bb9c87717235a2",
+          exercise_name: "Deadlift",
+          sets: 5,
+          reps: 12,
+        },
+      ],
+    };
+    it("Workout POST - Success", (done) => {
+      request
+        .post("/workouts")
+        .send(WorkoutTest)
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+  });
+
   beforeAll((done) => {
     server = app.startServer(port);
     server.once("listening", () => {
