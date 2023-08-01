@@ -32,7 +32,7 @@ const crudRoute = require('../route/crud');
 app.use('/', crudRoute);
 
 // API for Frontend
-function apiServer() {
+
   app.listen(apiPort, (err) => {
     if (!err) {
       console.log(`API is running on port: ${apiPort}`);
@@ -40,7 +40,7 @@ function apiServer() {
       console.error(err);
     }
   });
-}
+
 
 // For integration test
 function startServer() {
@@ -57,7 +57,6 @@ function startServer() {
 
 // Separate the functions and export them
 module.exports = app;
-module.exports.apiServer = apiServer;
 module.exports.startServer = startServer;
 
 if (require.main === module) {
