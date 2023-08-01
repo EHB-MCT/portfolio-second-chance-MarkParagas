@@ -24,9 +24,9 @@ const workoutSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: function (value) {
-        return value >= 0;
+        return value >= 1;
       },
-      message: "Duration cannot be a negative number",
+      message: "Duration cannot be a negative number or zero value",
     },
   },
   exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: "Exercise" }],
@@ -42,9 +42,9 @@ const exerciseSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: function (value) {
-        return value >= 0;
+        return value >= 1;
       },
-      message: "Sets cannot be a negative number",
+      message: "Sets cannot be a negative number or zero value",
     },
   },
   reps: {
@@ -52,9 +52,9 @@ const exerciseSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: function (value) {
-        return value >= 0;
+        return value >= 1;
       },
-      message: "Reps cannot be a negative number",
+      message: "Reps cannot be a negative number or zero value",
     },
   },
 });
