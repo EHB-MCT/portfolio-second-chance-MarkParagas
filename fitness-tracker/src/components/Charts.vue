@@ -59,7 +59,6 @@ export default {
             // Extract the data from API
             const workout_name = getData.map(index => index.workout_name);
             const duration = getData.map(index => index.duration);
-            // This need to be check below
             const sets = getData.map(index => index.exercises[0].sets);
             const reps = getData.map(index => index.exercises[0].reps);
 
@@ -70,9 +69,7 @@ export default {
             myChart.data.datasets[2].data = reps; // Reps
             myChart.update();
         }
-
         fetchData();
-
     }
 }
 </script>

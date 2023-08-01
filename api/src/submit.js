@@ -16,7 +16,6 @@ function checkWorkoutPOST(data) {
     "Forearms",
   ];
 
-  // Workout POST validation
   if (
     date &&
     workout_name &&

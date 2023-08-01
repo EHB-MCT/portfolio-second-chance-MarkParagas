@@ -1,6 +1,5 @@
 <script>
 import Navigation from '../components/Nav.vue'
-// import router from '../router'
 
 export default {
   components: {
@@ -57,7 +56,6 @@ export default {
           if (workoutResponse.ok) {
             console.log('Workout POST request successful')
             window.location.reload();
-            //router.push('/Stats')
           } else {
             console.error('Workout POST request failed')
           }
