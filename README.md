@@ -2,16 +2,22 @@
 # Fitness-tracking
 
 ## Requirement
-- Docker desktop!
+- Docker desktop! 
+```
+https://www.docker.com/products/docker-desktop/
+```
 
 ## Getting Started
 - Installation
 1. Git clone my repository on Github
-2. Open VScode, change the file (.env.temp) into .env and fill the variabels
+```
+https://github.com/EHB-MCT/portfolio-second-chance-MarkParagas.git
+```
+2. Open VScode, change the file  ***(.env.temp) *** into  ***.env*** and fill the variabels
 3. Make sure your to 'Docker Desktop' is open
-4. Open to terminal and Type "Docker compose build"
+4. Open to terminal and Type  ***"Docker compose build" ***
 - Start project
-5. After type in terminal: "Docker compose up"
+5. After type in terminal:  ***"Docker compose up -d"***
 6. Go to browser and type: localhost:8080
 
 ## Routes to use
