@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const mongoose = require("mongoose");
-const cors = require("cors");
-require("dotenv").config({ path: "../.env" });
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config({ path: '../.env' });
 const testPort = 3001;
 const apiPort = process.env.API_PORT;
 const { MONGODB_USER, MONGODB_PASSWORD, MONGODB_DB } = process.env;
@@ -19,30 +19,32 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Connected to MongoDB");
+    console.log('Connected to MongoDB');
   })
   .catch((err) => {
-    console.error("Error connecting to MongoDB:", err);
+    console.error('Error connecting to MongoDB:', err);
   });
 
 // Import routes
-const crudRoute = require("../route/crud");
+const crudRoute = require('../route/crud');
 
 // Use routes
-app.use("/", crudRoute);
+app.use('/', crudRoute);
 
 // API for Frontend
-app.listen(apiPort, (err) => {
-  if (!err) {
-    console.log(`API is running on port: ${apiPort}`);
-  } else {
-    console.error(err);
-  }
-});
+function apiServer() {
+  app.listen(apiPort, (err) => {
+    if (!err) {
+      console.log(`API is running on port: ${apiPort}`);
+    } else {
+      console.error(err);
+    }
+  });
+}
 
 // For integration test
 function startServer() {
-  app.set("port", testPort);
+  app.set('port', testPort);
   // Return to integration test
   return app.listen(testPort, (err) => {
     if (!err) {
@@ -55,6 +57,7 @@ function startServer() {
 
 // Separate the functions and export them
 module.exports = app;
+module.exports.apiServer = apiServer;
 module.exports.startServer = startServer;
 
 if (require.main === module) {
