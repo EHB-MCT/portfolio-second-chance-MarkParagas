@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-function checkSubmitPOST(data) {
+function checkWorkoutPOST(data) {
   const { date, workout_name, duration, exercises } = data;
 
   let listOfWorkouts = [
@@ -51,4 +51,4 @@ function checkExercisePOST(exercise) {
   }
 }
 
-module.exports = { checkSubmitPOST, checkExercisePOST };
+module.exports = { checkWorkoutPOST, checkExercisePOST };
